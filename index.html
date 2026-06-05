@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>專業顧問 | 個人介紹</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#040d1e',
+              900: '#071430',
+              800: '#0a1d45',
+              700: '#0d2660',
+              600: '#113180',
+            },
+            gold: {
+              300: '#f5d98b',
+              400: '#e8c154',
+              500: '#c9992a',
+              600: '#a87d1a',
+              700: '#7a5a10',
+            }
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'Noto Serif TC', 'serif'],
+            body: ['Noto Serif TC', 'serif'],
+            accent: ['Cormorant Garamond', 'serif'],
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.8s ease forwards',
+            'fade-in': 'fadeIn 1s ease forwards',
+            'shimmer': 'shimmer 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --gold: #c9992a;
+      --gold-light: #e8c154;
+      --navy: #071430;
+      --navy-dark: #040d1e;
+    }
+
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background-color: var(--navy-dark);
+      color: #e8dfc8;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── Gold shimmer text ── */
+    .gold-shimmer {
+      background: linear-gradient(90deg, #c9992a 0%, #f5d98b 30%, #e8c154 50%, #f5d98b 70%, #c9992a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* ── Decorative divider ── */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+    .ornament::before, .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9992a, transparent);
+      max-width: 120px;
+    }
+
+    /* ── Hero background ── */
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(17, 49, 128, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 50%, rgba(201, 153, 42, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, #040d1e 0%, #071430 50%, #040d1e 100%);
+    }
+
+    /* ── Card glass effect ── */
+    .glass-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(201, 153, 42, 0.2);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,153,42,0.5), transparent);
+    }
+
+    /* ── Section fade-in on scroll ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Input styling ── */
+    .form-input {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,153,42,0.25);
+      color: #e8dfc8;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: rgba(201,153,42,0.7);
+      box-shadow: 0 0 0 3px rgba(201,153,42,0.1);
+    }
+    .form-input::placeholder { color: rgba(232,223,200,0.35); }
+
+    /* ── Gold button ── */
+    .btn-gold {
+      background: linear-gradient(135deg, #a87d1a, #c9992a, #e8c154, #c9992a, #a87d1a);
+      background-size: 200% auto;
+      color: #040d1e;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(201,153,42,0.3);
+    }
+    .btn-gold:hover {
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,153,42,0.45);
+    }
+    .btn-gold:active { transform: translateY(0); }
+
+    /* ── LINE button ── */
+    .btn-line {
+      background: linear-gradient(135deg, #00b900, #00c900);
+      color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,185,0,0.25);
+    }
+    .btn-line:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,185,0,0.4);
+    }
+
+    /* ── Expertise icon circles ── */
+    .icon-ring {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,153,42,0.4);
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(201,153,42,0.12), rgba(201,153,42,0.04));
+      flex-shrink: 0;
+    }
+
+    /* ── Stat counter ── */
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    /* ── Nav ── */
+    nav {
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,153,42,0.15);
+    }
+
+    /* ── Floating deco circles ── */
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201,153,42,0.12);
+      pointer-events: none;
+    }
+
+    /* ── Toast ── */
+    #toast {
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.4s ease;
+      pointer-events: none;
+    }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="relative">
+
+<!-- ─────────────────────────────────────────
+     NAV
+───────────────────────────────────────── -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-navy-950/80">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#hero" class="font-display text-lg tracking-widest gold-shimmer font-semibold">
+      YOUR NAME
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm tracking-widest text-gold-300/70 uppercase">
+      <a href="#about" class="hover:text-gold-400 transition-colors">關於我</a>
+      <a href="#expertise" class="hover:text-gold-400 transition-colors">專業服務</a>
+      <a href="#stats" class="hover:text-gold-400 transition-colors">成績亮點</a>
+      <a href="#contact" class="hover:text-gold-400 transition-colors">聯絡我</a>
+    </div>
+    <a href="https://line.me/ti/p/YOUR_LINE_ID" target="_blank"
+       class="btn-line text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full flex items-center gap-2">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.03 2 11c0 3.37 1.88 6.33 4.73 8.11L6 22l2.9-1.52A10.63 10.63 0 0012 21c5.52 0 10-4.03 10-9S17.52 2 12 2z"/>
+      </svg>
+      LINE 聯繫
+    </a>
+  </div>
+</nav>
+
+<!-- ─────────────────────────────────────────
+     HERO
+───────────────────────────────────────── -->
+<section id="hero" class="hero-bg relative min-h-screen flex items-center pt-20 overflow-hidden">
+  <!-- deco circles -->
+  <div class="deco-circle w-96 h-96 top-10 -right-24 animate-float" style="animation-delay:0s"></div>
+  <div class="deco-circle w-64 h-64 bottom-20 left-10 animate-float" style="animation-delay:2s"></div>
+  <div class="deco-circle w-32 h-32 top-1/3 left-1/4 animate-float" style="animation-delay:4s"></div>
+
+  <!-- corner ornaments -->
+  <div class="absolute top-24 left-8 w-16 h-16 border-t border-l border-gold-500/30 pointer-events-none"></div>
+  <div class="absolute bottom-12 right-8 w-16 h-16 border-b border-r border-gold-500/30 pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full grid md:grid-cols-2 gap-16 items-center py-20">
+    <!-- Text -->
+    <div class="animate-fade-up" style="animation-delay:0.1s">
+      <p class="text-gold-400 tracking-[0.3em] text-xs uppercase mb-4 font-accent italic">
+        Professional Consultant
+      </p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-2 text-white">
+        您的名字
+      </h1>
+      <h2 class="gold-shimmer font-display text-2xl md:text-3xl font-semibold mb-6 tracking-wide">
+        專業顧問 · 財務規劃師
+      </h2>
+      <div class="ornament mb-6">
+        <span class="text-gold-500 text-xs tracking-widest uppercase">Excellence</span>
+      </div>
+      <p class="text-white/60 text-base md:text-lg leading-relaxed mb-10 max-w-lg font-body font-light">
+        超過 15 年的實務經驗，協助百位以上客戶實現財富自由與事業突破。
+        以專業、誠信與精準分析，為您打造量身定制的解決方案。
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#contact"
+           class="btn-gold px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest font-bold inline-block">
+          立即預約諮詢
+        </a>
+        <a href="#about"
+           class="border border-gold-500/40 text-gold-300 px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest hover:border-gold-400 hover:text-gold-200 transition-all inline-block">
+          了解更多
+        </a>
+      </div>
+    </div>
+
+    <!-- Avatar card -->
+    <div class="flex justify-center animate-fade-in" style="animation-delay:0.4s">
+      <div class="relative">
+        <!-- golden frame -->
+        <div class="absolute -inset-3 rounded-lg border border-gold-500/20 pointer-events-none"></div>
+        <div class="absolute -inset-6 rounded-xl border border-gold-500/10 pointer-events-none"></div>
+        <div class="w-72 h-80 md:w-80 md:h-96 glass-card rounded-lg overflow-hidden flex items-center justify-center">
+          <!-- Replace src with your actual photo -->
+          <div class="w-full h-full bg-gradient-to-b from-navy-800 to-navy-950 flex flex-col items-center justify-center gap-4 text-gold-500/40">
+            <svg class="w-24 h-24" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+            </svg>
+            <p class="text-xs tracking-widest uppercase opacity-60">請替換為您的照片</p>
+          </div>
+        </div>
+        <!-- floating badge -->
+        <div class="absolute -bottom-4 -right-4 glass-card rounded-lg px-4 py-3 text-center shadow-2xl">
+          <p class="gold-shimmer font-display text-2xl font-bold">15+</p>
+          <p class="text-white/50 text-xs tracking-wider">年實務經驗</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+     ABOUT
+───────────────────────────────────────── -->
+<section id="about" class="py-28 relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal text-center mb-16">
+      <p class="text-gold-500 tracking-[0.3em] text-xs uppercase mb-3 font-accent italic">About Me</p>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">關於我</h2>
+      <div class="ornament"><span class="text-gold-600 text-xs tracking-widest">◆</span></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <div class="glass-card rounded-xl p-8 space-y-5">
+          <p class="text-white/75 leading-relaxed text-lg font-light">
+            我是一位擁有豐富實戰經驗的專業顧問，深耕財務規劃、企業策略與個人品牌建立領域。
+            過去 15 年間，我服務超過 <strong class="text-gold-400">500 位</strong> 客戶，涵蓋各行各業的菁英人士與企業主。
+          </p>
+          <p class="text-white/60 leading-relaxed font-light">
+            我相信每位客戶都是獨一無二的，因此提供完全個人化的顧問服務，
+            從初步評估到策略執行，全程陪伴您實現目標。
+          </p>
+          <div class="pt-4 border-t border-gold-500/15 grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-gold-400 text-sm tracking-widest uppercase mb-1">專長領域</p>
+              <p class="text-white/70 text-sm leading-relaxed">財務規劃 · 資產配置<br>企業顧問 · 退休規劃</p>
+            </div>
+            <div>
+              <p class="text-gold-400 text-sm tracking-widest uppercase mb-1">服務對象</p>
+              <p class="text-white/70 text-sm leading-relaxed">高資產人士<br>中小企業主 · 專業人士</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal space-y-4" style="transition-delay:0.15s">
+        <!-- Credential items -->
+        {['CFP 國際認證理財規劃師', 'CFA 特許金融分析師', '台灣財務顧問協會理事', '前知名金融機構資深副總'].map((cred, i) => `
+        <div class="glass-card rounded-lg px-6 py-4 flex items-center gap-4">
+          <div class="icon-ring">
+            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+            </svg>
+          </div>
+          <p class="text-white/80 font-body">${cred}</p>
+        </div>`).join('')}
+
+        <div class="glass-card rounded-lg px-6 py-4 flex items-center gap-4">
+          <div class="icon-ring">
+            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+            </svg>
+          </div>
+          <p class="text-white/80 font-body">CFP 國際認證理財規劃師</p>
+        </div>
+        <div class="glass-card rounded-lg px-6 py-4 flex items-center gap-4">
+          <div class="icon-ring">
+            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>
+            </svg>
+          </div>
+          <p class="text-white/80 font-body">CFA 特許金融分析師</p>
+        </div>
+        <div class="glass-card rounded-lg px-6 py-4 flex items-center gap-4">
+          <div class="icon-ring">
+            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+            </svg>
+          </div>
+          <p class="text-white/80 font-body">台灣財務顧問協會理事</p>
+        </div>
+        <div class="glass-card rounded-lg px-6 py-4 flex items-center gap-4">
+          <div class="icon-ring">
+            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/>
+            </svg>
+          </div>
+          <p class="text-white/80 font-body">前知名金融機構資深副總裁</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+     STATS
+───────────────────────────────────────── -->
+<section id="stats" class="py-20 relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="glass-card rounded-2xl p-10 grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+      <div class="text-center">
+        <p class="stat-number gold-shimmer" data-target="500">0</p>
+        <p class="text-gold-500/60 text-xs tracking-widest uppercase mt-2">服務客戶</p>
+      </div>
+      <div class="text-center">
+        <p class="stat-number gold-shimmer" data-target="15">0</p>
+        <p class="text-gold-500/60 text-xs tracking-widest uppercase mt-2">年資歷</p>
+      </div>
+      <div class="text-center">
+        <p class="stat-number gold-shimmer" data-target="98">0</p>
+        <p class="text-gold-500/60 text-xs tracking-widest uppercase mt-2">滿意度%</p>
+      </div>
+      <div class="text-center">
+        <p class="stat-number gold-shimmer" data-target="3">0</p>
+        <p class="text-gold-500/60 text-xs tracking-widest uppercase mt-2">國際認證</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+     EXPERTISE
+───────────────────────────────────────── -->
+<section id="expertise" class="py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal text-center mb-16">
+      <p class="text-gold-500 tracking-[0.3em] text-xs uppercase mb-3 font-accent italic">Services</p>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">專業服務項目</h2>
+      <div class="ornament"><span class="text-gold-600 text-xs tracking-widest">◆</span></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Service cards -->
+      <div class="glass-card rounded-xl p-7 reveal hover:border-gold-400/40 transition-all duration-300 group">
+        <div class="icon-ring mb-5 group-hover:border-gold-400/60 transition-colors">
+          <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold text-white mb-3">財務規劃</h3>
+        <p class="text-white/55 text-sm leading-relaxed font-light">全面評估您的財務狀況，制定短中長期規劃，涵蓋預算管理、儲蓄策略與稅務優化。</p>
+        <div class="mt-5 pt-4 border-t border-gold-500/10">
+          <p class="text-gold-500 text-xs tracking-widest uppercase">了解詳情 →</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-7 reveal hover:border-gold-400/40 transition-all duration-300 group" style="transition-delay:0.1s">
+        <div class="icon-ring mb-5 group-hover:border-gold-400/60 transition-colors">
+          <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold text-white mb-3">資產配置</h3>
+        <p class="text-white/55 text-sm leading-relaxed font-light">依據您的風險承受度與目標，制定多元化投資組合策略，平衡報酬與風險。</p>
+        <div class="mt-5 pt-4 border-t border-gold-500/10">
+          <p class="text-gold-500 text-xs tracking-widest uppercase">了解詳情 →</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-7 reveal hover:border-gold-400/40 transition-all duration-300 group" style="transition-delay:0.2s">
+        <div class="icon-ring mb-5 group-hover:border-gold-400/60 transition-colors">
+          <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold text-white mb-3">退休規劃</h3>
+        <p class="text-white/55 text-sm leading-relaxed font-light">及早布局退休生活，打造穩固的被動收入體系，讓您的晚年無憂無慮。</p>
+        <div class="mt-5 pt-4 border-t border-gold-500/10">
+          <p class="text-gold-500 text-xs tracking-widest uppercase">了解詳情 →</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-7 reveal hover:border-gold-400/40 transition-all duration-300 group" style="transition-delay:0.1s">
+        <div class="icon-ring mb-5 group-hover:border-gold-400/60 transition-colors">
+          <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold text-white mb-3">企業顧問</h3>
+        <p class="text-white/55 text-sm leading-relaxed font-light">為中小企業提供財務結構優化、融資策略與股權規劃等全方位企業顧問服務。</p>
+        <div class="mt-5 pt-4 border-t border-gold-500/10">
+          <p class="text-gold-500 text-xs tracking-widest uppercase">了解詳情 →</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-7 reveal hover:border-gold-400/40 transition-all duration-300 group" style="transition-delay:0.2s">
+        <div class="icon-ring mb-5 group-hover:border-gold-400/60 transition-colors">
+          <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold text-white mb-3">保險規劃</h3>
+        <p class="text-white/55 text-sm leading-relaxed font-light">全面評估保障缺口，客觀推薦最適合的保險方案，確保您與家人的全面保障。</p>
+        <div class="mt-5 pt-4 border-t border-gold-500/10">
+          <p class="text-gold-500 text-xs tracking-widest uppercase">了解詳情 →</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-xl p-7 reveal hover:border-gold-400/40 transition-all duration-300 group" style="transition-delay:0.3s">
+        <div class="icon-ring mb-5 group-hover:border-gold-400/60 transition-colors">
+          <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-xl font-semibold text-white mb-3">傳承規劃</h3>
+        <p class="text-white/55 text-sm leading-relaxed font-light">協助您進行資產傳承與稅務規劃，確保財富順利交棒，降低遺產稅負擔。</p>
+        <div class="mt-5 pt-4 border-t border-gold-500/10">
+          <p class="text-gold-500 text-xs tracking-widest uppercase">了解詳情 →</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+     CONTACT FORM
+───────────────────────────────────────── -->
+<section id="contact" class="py-28">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="reveal text-center mb-16">
+      <p class="text-gold-500 tracking-[0.3em] text-xs uppercase mb-3 font-accent italic">Contact</p>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">預約免費諮詢</h2>
+      <div class="ornament mb-4"><span class="text-gold-600 text-xs tracking-widest">◆</span></div>
+      <p class="text-white/50 text-sm max-w-md mx-auto leading-relaxed">
+        填寫以下表單，我將於 24 小時內與您聯繫，安排一對一諮詢時間。
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Form -->
+      <div class="md:col-span-2 reveal">
+        <div class="glass-card rounded-2xl p-8">
+          <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label class="text-gold-400/70 text-xs tracking-widest uppercase block mb-2">姓名 *</label>
+              <input id="form-name" type="text" placeholder="您的姓名"
+                class="form-input w-full rounded-lg px-4 py-3.5 text-sm" />
+            </div>
+            <div>
+              <label class="text-gold-400/70 text-xs tracking-widest uppercase block mb-2">電話 *</label>
+              <input id="form-phone" type="tel" placeholder="0912-345-678"
+                class="form-input w-full rounded-lg px-4 py-3.5 text-sm" />
+            </div>
+          </div>
+          <div class="mb-5">
+            <label class="text-gold-400/70 text-xs tracking-widest uppercase block mb-2">電子郵件</label>
+            <input id="form-email" type="email" placeholder="your@email.com"
+              class="form-input w-full rounded-lg px-4 py-3.5 text-sm" />
+          </div>
+          <div class="mb-5">
+            <label class="text-gold-400/70 text-xs tracking-widest uppercase block mb-2">諮詢項目</label>
+            <select id="form-service" class="form-input w-full rounded-lg px-4 py-3.5 text-sm appearance-none"
+              style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 20 20%22><path stroke=%22%23c9992a%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%221.5%22 d=%22M6 8l4 4 4-4%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px;">
+              <option value="" style="background:#071430">請選擇諮詢項目</option>
+              <option value="財務規劃" style="background:#071430">財務規劃</option>
+              <option value="資產配置" style="background:#071430">資產配置</option>
+              <option value="退休規劃" style="background:#071430">退休規劃</option>
+              <option value="企業顧問" style="background:#071430">企業顧問</option>
+              <option value="保險規劃" style="background:#071430">保險規劃</option>
+              <option value="傳承規劃" style="background:#071430">傳承規劃</option>
+              <option value="其他" style="background:#071430">其他</option>
+            </select>
+          </div>
+          <div class="mb-7">
+            <label class="text-gold-400/70 text-xs tracking-widest uppercase block mb-2">簡述需求</label>
+            <textarea id="form-message" rows="4" placeholder="請簡單描述您的財務狀況或希望解決的問題…"
+              class="form-input w-full rounded-lg px-4 py-3.5 text-sm resize-none"></textarea>
+          </div>
+          <button id="submit-btn" onclick="handleSubmit()"
+            class="btn-gold w-full rounded-lg py-4 text-sm uppercase tracking-widest font-bold">
+            送出諮詢申請
+          </button>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="reveal space-y-5" style="transition-delay:0.15s">
+        <!-- LINE CTA -->
+        <div class="glass-card rounded-2xl p-6 text-center">
+          <div class="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.03 2 11c0 3.37 1.88 6.33 4.73 8.11L6 22l2.9-1.52A10.63 10.63 0 0012 21c5.52 0 10-4.03 10-9S17.52 2 12 2zm0 15c-3.31 0-6-2.01-6-4.5 0-.58.27-1.12.72-1.57C7.96 9.7 9.93 9 12 9s4.04.7 5.28 1.93c.45.45.72.99.72 1.57C18 14.99 15.31 17 12 17z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white mb-2">即時 LINE 聯繫</h3>
+          <p class="text-white/50 text-xs leading-relaxed mb-5">加入官方帳號，獲得即時回應與免費財務健診報告</p>
+          <a href="https://line.me/ti/p/YOUR_LINE_ID" target="_blank"
+             class="btn-line w-full py-3.5 rounded-lg text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.03 2 11c0 3.37 1.88 6.33 4.73 8.11L6 22l2.9-1.52A10.63 10.63 0 0012 21c5.52 0 10-4.03 10-9S17.52 2 12 2z"/>
+            </svg>
+            加入 LINE 官方帳號
+          </a>
+        </div>
+
+        <!-- Contact info -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <h3 class="font-display text-base font-semibold text-white mb-1">聯絡資訊</h3>
+          <div class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+            </svg>
+            <p class="text-white/60 text-sm">0912-345-678</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+            </svg>
+            <p class="text-white/60 text-sm">your@email.com</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            </svg>
+            <p class="text-white/60 text-sm">台北市信義區<br>信義路五段 7 號</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <p class="text-white/60 text-sm">週一至週五<br>09:00 – 18:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────
+     FOOTER
+───────────────────────────────────────── -->
+<footer class="border-t border-gold-500/10 py-10">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="font-display text-lg tracking-widest gold-shimmer font-semibold">YOUR NAME</p>
+    <p class="text-white/30 text-xs tracking-widest text-center">
+      © 2025 專業顧問服務．保留所有權利
+    </p>
+    <a href="https://line.me/ti/p/YOUR_LINE_ID" target="_blank"
+       class="btn-line text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-full flex items-center gap-2">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.03 2 11c0 3.37 1.88 6.33 4.73 8.11L6 22l2.9-1.52A10.63 10.63 0 0012 21c5.52 0 10-4.03 10-9S17.52 2 12 2z"/>
+      </svg>
+      加入 LINE
+    </a>
+  </div>
+</footer>
+
+<!-- ── Toast notification ── -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50
+  bg-navy-800 border border-gold-400/40 text-white rounded-xl px-6 py-4
+  shadow-2xl flex items-center gap-3 min-w-64 max-w-xs">
+  <div class="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center flex-shrink-0">
+    <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+    </svg>
+  </div>
+  <div>
+    <p class="font-semibold text-sm text-gold-300">申請已送出！</p>
+    <p class="text-white/55 text-xs mt-0.5">即將為您開啟 LINE 官方帳號</p>
+  </div>
+</div>
+
+<script>
+  // ── Scroll reveal ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Animated counters ──
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = +el.dataset.target;
+        const suffix = el.closest('.text-center').querySelector('p:last-child').textContent.includes('%') ? '+' : '+';
+        let current = 0;
+        const step = Math.ceil(target / 50);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current;
+          if (current >= target) clearInterval(timer);
+        }, 30);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  // ── Form submission ──
+  function handleSubmit() {
+    const name    = document.getElementById('form-name').value.trim();
+    const phone   = document.getElementById('form-phone').value.trim();
+    const email   = document.getElementById('form-email').value.trim();
+    const service = document.getElementById('form-service').value;
+    const message = document.getElementById('form-message').value.trim();
+
+    if (!name || !phone) {
+      // Shake empty required fields
+      ['form-name', 'form-phone'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.style.borderColor = '#ef4444';
+          el.style.animation = 'none';
+          setTimeout(() => {
+            el.style.borderColor = '';
+          }, 2000);
+        }
+      });
+      return;
+    }
+
+    // Show toast
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+
+    // Redirect to LINE after 1.8s
+    setTimeout(() => {
+      // ── Replace YOUR_LINE_ID with your actual LINE ID ──
+      window.open('https://line.me/ti/p/YOUR_LINE_ID', '_blank');
+      toast.classList.remove('show');
+
+      // Reset form
+      ['form-name','form-phone','form-email','form-message'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('form-service').selectedIndex = 0;
+    }, 1800);
+  }
+
+  // ── Mobile nav scroll indicator ──
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(4, 13, 30, 0.95)';
+    } else {
+      nav.style.background = 'rgba(4, 13, 30, 0.80)';
+    }
+  });
+</script>
+</body>
+</html>
